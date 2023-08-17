@@ -28,7 +28,7 @@ export default function App() {
   const [frais, setfrais] = useState(0);
   const [toSend, setToSend] = useState(0);
   const [toReceive, setToReceive] = useState(0);
-  const BASE_URL = 'http://api.exchangeratesapi.io/v1/latest?access_key=fa5f93fc0965f0784e4f9128e9f494d3&format=1';
+  const BASE_URL = 'http://api.exchangeratesapi.io/v1/latest?access_key=fa5f93fc0965f0784e4f9128e9f494d3';
   useEffect(() => {
     fetchExchangeRate();
   }, []);
