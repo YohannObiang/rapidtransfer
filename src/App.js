@@ -53,7 +53,7 @@ fetch(BASE_URL)
     const result= Math.floor(e.target.value-(e.target.value*5.5/100))
     const result2= Math.floor(result/exchangeRate)
 
-    setToSend(result2);
+    setfrais(result2);
     console.log(result2);
     setfrais(Math.floor(e.target.value*5.5/100))
   };
