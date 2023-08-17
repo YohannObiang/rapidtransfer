@@ -55,7 +55,7 @@ fetch(BASE_URL)
 
     setfrais(result2);
     console.log(result2);
-    setfrais(Math.floor(e.target.value*5.5/100))
+    // setfrais(Math.floor(e.target.value*5.5/100))
   };
   const handleChangeToReceive2 = (e) => {
     setToReceive(e.target.value);
