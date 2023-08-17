@@ -65,7 +65,7 @@ fetch(BASE_URL)
     sx={{
       display: 'flex',
       flexDirection: 'column',
-      minHeight: '100vh',
+      minHeight: '90vh',
     }}
   >
     <div style={{height:'75px', backgroundColor:'black', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
