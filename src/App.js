@@ -28,7 +28,7 @@ export default function App() {
   const [frais, setfrais] = useState(0);
   const [toSend, setToSend] = useState(0);
   const [toReceive, setToReceive] = useState(0);
-  const BASE_URL = 'http://api.exchangeratesapi.io/v1/latest?access_key=fa5f93fc0965f0784e4f9128e9f494d3';
+  const BASE_URL = 'https://v6.exchangerate-api.com/v6/7d510eacf9aafb382d783d68/pair/ZAR/XAF';
   useEffect(() => {
     fetchExchangeRate();
   }, []);
@@ -36,7 +36,8 @@ export default function App() {
   function fetchExchangeRate() {
 fetch(BASE_URL)
   .then(res => res.json())
-  .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
+  // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
+  .then(query => setExchangeRate(query.conversion_rate))
 
   }
 
