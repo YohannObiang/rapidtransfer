@@ -38,7 +38,7 @@ export default function App() {
 fetch(BASE_URL)
   .then(res => res.json())
   // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
-  .then(query => setExchangeRate(query.conversion_rate))
+  .then(query => setExchangeRate(query.conversion_rate+2.5))
 
   }
 
