@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import logo from "./logoM-removebg-preview.png"
 
 const defaultTheme = createTheme();
 
@@ -16,7 +17,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      RapidTransfer{' '}
+      MoneyFlow{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -27,7 +28,7 @@ export default function App() {
   const [exchangeRate, setExchangeRate] = useState(0);
   const [frais, setfrais] = useState(0);
   const [toSend, setToSend] = useState(0);
-  const [toReceive, setToReceive] = useState(0);
+  const [toReceive, setToReceive] = useState();
   const BASE_URL = 'https://v6.exchangerate-api.com/v6/7d510eacf9aafb382d783d68/pair/ZAR/XAF';
   useEffect(() => {
     fetchExchangeRate();
@@ -72,8 +73,8 @@ fetch(BASE_URL)
       minHeight: '90vh',
     }}
   >
-    <div style={{height:'75px', backgroundColor:'black', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
-<h2 style={{color:'white'}}>RapidTransfer</h2>
+    <div style={{height:'75px', backgroundColor:'#eeeeee', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
+<img src={logo} alt="" style={{height:'75px'}}/>
 </div>
      <ThemeProvider theme={defaultTheme}sx={{display:'flex', alignItem:'center', justifyContent:'center', height:'100vh', margin:'50px'}}>
       
@@ -89,7 +90,7 @@ fetch(BASE_URL)
             required
             fullWidth
             name="number"
-            label="Montant à envoyer frais inclus (Franc CFA)"
+            label="Montant à envoyer (Franc CFA)"
             type="number"
             id="toReceive"
             onChange={handleChangeToReceive}
@@ -151,7 +152,7 @@ fetch(BASE_URL)
         >
           <Container maxWidth="sm">
             <Typography variant="body1">
-            Développé par <a href='yohannobiang.com' style={{color:'black'}} ><strong>Yohann Obiang</strong></a>
+            Développé par <a href='https://yohannobiang.com' style={{color:'black'}} ><strong>Yohann Obiang</strong></a>
             </Typography>
             <Copyright />
           </Container>
