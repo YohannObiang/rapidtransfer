@@ -102,7 +102,7 @@ fetch(BASE_URL)
             fullWidth
             disabled
             name="number"
-            label="Frais d'envoi (Franc CFA)"
+            label="Frais inclus (Franc CFA)"
             type="number"
             id="toReceive"
             onChange={handleChangeToReceive2}
