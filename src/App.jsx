@@ -38,7 +38,7 @@ export default function App() {
 fetch(BASE_URL)
   .then(res => res.json())
   // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
-  .then(query => setExchangeRate(query.conversion_rate+2))
+  .then(query => setExchangeRate(query.conversion_rate+2.3))
 
   }
 
@@ -53,16 +53,16 @@ fetch(BASE_URL)
   const handleChangeToReceive = (e) => {
     fetchExchangeRate()
     setToReceive(e.target.value);
-    const result= Math.ceil(e.target.value-(e.target.value*5/100))
+    const result= Math.ceil(e.target.value-(e.target.value*5.5/100))
     setToSend(Math.floor(result/exchangeRate));
-    console.log(Math.floor((e.target.value-(e.target.value*5/100))/exchangeRate));
+    console.log(Math.floor((e.target.value-(e.target.value*5.5/100))/exchangeRate));
     setfrais(Math.floor(e.target.value*5.5/100))
     console.log(exchangeRate)
   };
   const handleChangeToReceive2 = (e) => {
     setToReceive(e.target.value);
     const result= Math.floor(e.target.value / exchangeRate)
-    setfrais(Math.floor(result*5/100*exchangeRate));
+    setfrais(Math.floor(result*5.5/100*exchangeRate));
   };
 
   return (
