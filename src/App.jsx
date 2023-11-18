@@ -10,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import logo from "./logoM-removebg-preview.png"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GabonToSa from './components/GabonToSa';
+import SaToGabon from './components/SaToGabon';
 
 const defaultTheme = createTheme();
 
@@ -38,7 +41,7 @@ export default function App() {
 fetch(BASE_URL)
   .then(res => res.json())
   // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
-  .then(query => setExchangeRate(query.conversion_rate+2.5))
+  .then(query => setExchangeRate(query.conversion_rate+2.3))
 
   }
 
@@ -66,99 +69,66 @@ fetch(BASE_URL)
   };
 
   return (
-    <Box
-    sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '90vh',
-    }}
-  >
-    <div style={{height:'75px', backgroundColor:'#eeeeee', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
-<img src={logo} alt="" style={{height:'75px'}}/>
-</div>
-     <ThemeProvider theme={defaultTheme}sx={{display:'flex', alignItem:'center', justifyContent:'center', height:'100vh', margin:'50px'}}>
-      
-        <Container component="main" maxWidth="xs" sx={{mt:5}}>
-        <Card sx={{padding:'20px 10px', height:'fit-content'}}>
-        <Typography component="h1" variant="h5">
-          Convertisseur de devises
-        </Typography>
-        <form noValidate>
-          
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="number"
-            label="Montant à envoyer (Franc CFA)"
-            type="number"
-            id="toReceive"
-            onChange={handleChangeToReceive}
-            value={toReceive}
-          />
-          
-          <TextField
-            margin="normal"
-            fullWidth
-            disabled
-            name="number"
-            label="Frais inclus (Franc CFA)"
-            type="number"
-            id="toReceive"
-            onChange={handleChangeToReceive2}
-            value={frais}
-          />
-          <TextField
-            margin="normal"
-            required
-            // disabled
-            fullWidth
-            id="toReceive"
-            label="Montant à recevoir (Rand sud-africain)"
-            name="number"
-            type="number"
-            onChange={handleChangeToSend}
-            value={toSend}
-          />
-        </form>
-        </Card>
-        <br/>
-        <br/>
-        <Card sx={{padding:'20px 10px', height:'fit-content', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-        <WhatsAppIcon sx={{fontSize:'50px'}}/>
-        <span>+27 61 857 4387</span>
-        </Card>
+    <BrowserRouter>
 
-      </Container>
-      
-      
-    </ThemeProvider>  
+<Box
+         sx={{
+           display: 'flex',
+           flexDirection: 'column',
+           minHeight: '90vh',
+         }}
+       >
+         <div style={{height:'75px', backgroundColor:'#eeeeee', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
+     <img src={logo} alt="" style={{height:'75px'}}/>
+     </div>
+          <ThemeProvider theme={defaultTheme}sx={{display:'flex', alignItem:'center', justifyContent:'center', height:'100vh', margin:'50px'}}>
+           
+             <Container component="main" maxWidth="xs" sx={{mt:5}}>
 
-<ThemeProvider theme={defaultTheme}>
+             <Routes>
+        <Route path="/" element={<GabonToSa/>}/>
+        <Route path="/to-gabon" element={<SaToGabon/>}/>
+      </Routes>
 
-        <CssBaseline />
-
-        <Box
-          component="footer"
-          sx={{
-            py: 3,
-            px: 2,
-            mt: 'auto',
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography variant="body1">
-            Développé par <a href='https://yohannobiang.com' style={{color:'black'}} ><strong>Yohann Obiang</strong></a>
-            </Typography>
-            <Copyright />
-          </Container>
-        </Box>
-      
-    </ThemeProvider>
-</Box>
+             <br/>
+             <Card sx={{padding:'20px 10px', height:'fit-content', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+             <WhatsAppIcon sx={{fontSize:'50px'}}/>
+             <span>+27 61 857 4387</span>
+             </Card>
+     
+           </Container>
+           
+           
+         </ThemeProvider>  
+     
+     <ThemeProvider theme={defaultTheme}>
+     
+             <CssBaseline />
+     
+             <Box
+               component="footer"
+               sx={{
+                 py: 3,
+                 px: 2,
+                 mt: 'auto',
+                 backgroundColor: (theme) =>
+                   theme.palette.mode === 'light'
+                     ? theme.palette.grey[200]
+                     : theme.palette.grey[800],
+               }}
+             >
+               <Container maxWidth="sm">
+                 <Typography variant="body1">
+                 Développé par <a href='https://yohannobiang.com' style={{color:'black'}} ><strong>Yohann Obiang</strong></a>
+                 </Typography>
+                 <Copyright />
+               </Container>
+             </Box>
+           
+         </ThemeProvider>
+         </Box>
+ 
+    </BrowserRouter>
+   
   );
 }
