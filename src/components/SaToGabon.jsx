@@ -109,11 +109,7 @@ fetch(BASE_URL)
         </form>
         </Card>
         <br />
-        <div style={{textAlign:'center'}}>
-            <Link to="/">
-                Gabon - Afrique du sud
-            </Link>
-        </div>
+  
 
   </div>
         

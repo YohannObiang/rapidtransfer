@@ -8,7 +8,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {Link } from "react-router-dom";
+import Link from '@mui/material/Link';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GabonToSa from '../components/GabonToSa';
+import SaToGabon from '../components/SaToGabon';
+import Admin from './Admin'
+
+
+
+
+
 const defaultTheme = createTheme();
 
 function Copyright() {
@@ -22,7 +31,7 @@ function Copyright() {
   );
 }
 
-export default function GabonToSa() {
+export default function Home({transferType}) {
   const [exchangeRate, setExchangeRate] = useState(0);
   const [frais, setfrais] = useState(0);
   const [toSend, setToSend] = useState(0);
@@ -36,7 +45,7 @@ export default function GabonToSa() {
 fetch(BASE_URL)
   .then(res => res.json())
   // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
-  .then(query => setExchangeRate(query.conversion_rate+2.5))
+  .then(query => setExchangeRate(query.conversion_rate+2.3))
 
   }
 
@@ -62,59 +71,48 @@ fetch(BASE_URL)
     const result= Math.floor(e.target.value / exchangeRate)
     setfrais(Math.floor(result*5.5/100*exchangeRate));
   };
-
-  return (
-  <div>
-    <Card sx={{padding:'20px 10px', height:'fit-content'}}>
-        <Typography component="h1" variant="h5">
-          Convertisseur de devises (XAF-ZAF)
-        </Typography>
-        <form noValidate>
-          
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="number"
-            label="Montant à envoyer (Franc CFA)"
-            type="number"
-            id="toReceive"
-            onChange={handleChangeToReceive}
-            value={toReceive}
-          />
-          
-          <TextField
-            margin="normal"
-            fullWidth
-            disabled
-            name="number"
-            label="Frais inclus (Franc CFA)"
-            type="number"
-            id="toReceive"
-            onChange={handleChangeToReceive2}
-            value={frais}
-          />
-          <TextField
-            margin="normal"
-            required
-            // disabled
-            fullWidth
-            id="toReceive"
-            label="Montant à recevoir (Rand sud-africain)"
-            name="number"
-            type="number"
-            onChange={handleChangeToSend}
-            value={toSend}
-          />
-        </form>
-        </Card>
-        <br />
-        <div style={{textAlign:'center'}}>
-
-        </div>
-
-  </div>
+  const theme = createTheme({
+    palette: {
+      primary: {
+  
+        main: '#EEEEEE',
+  
+      },
+      secondary: {
+  
+        main: '#8AE0AA',
         
+      },
+    },
+  });  return (
 
+        <Box
+         sx={{
+           display: 'flex',
+           flexDirection: 'column',
+           minHeight: '90vh',
+         }}
+       >
+             <Container component="main" maxWidth="xs" sx={{mt:5}}>
+             {transferType ? (
+            <div>
+                <GabonToSa/>
+            </div>
+            ) : ( 
+            <div>
+                <SaToGabon/>
+            </div>
+            )}
+
+             <br/>
+             <Card sx={{padding:'20px 10px', height:'fit-content', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+             <WhatsAppIcon sx={{fontSize:'50px'}}/>
+             <span>+27 61 857 4387</span>
+             </Card>
+     
+             </Container>
+        </Box>
+ 
+   
   );
 }

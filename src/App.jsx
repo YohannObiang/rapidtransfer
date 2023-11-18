@@ -9,10 +9,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import logo from "./logoM-removebg-preview.png"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GabonToSa from './components/GabonToSa';
+import Home from './pages/Home';
 import SaToGabon from './components/SaToGabon';
+import Appbar  from './components/Appbar';
+import Admin from './pages/Admin'
+import axios from 'axios';
+
+
+
+
 
 const defaultTheme = createTheme();
 
@@ -28,46 +34,60 @@ function Copyright() {
 }
 
 export default function App() {
-  const [exchangeRate, setExchangeRate] = useState(0);
-  const [frais, setfrais] = useState(0);
-  const [toSend, setToSend] = useState(0);
-  const [toReceive, setToReceive] = useState();
-  const BASE_URL = 'https://v6.exchangerate-api.com/v6/7d510eacf9aafb382d783d68/pair/ZAR/XAF';
+  const [isTurned, setIsTurned] = useState(true);
+  const [transferType, setTransferType] = useState(true);
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   useEffect(() => {
-    fetchExchangeRate();
+    checkAuthentication();
   }, []);
 
-  function fetchExchangeRate() {
-fetch(BASE_URL)
-  .then(res => res.json())
-  // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
-  .then(query => setExchangeRate(query.conversion_rate+2.3))
+  const checkAuthentication = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Envoyer une requête au serveur pour vérifier la validité du token JWT
+        const response = await axios.post(`https://ebillet.onrender.com/api/check-auth`, { token });
+        if (response.data.valid) {
+          setIsTurned(false);
+          console.log("bon");
+        } else {
+          setIsTurned(true);
+          console.log("bad");
 
-  }
+        }
+      } else {
+        setIsTurned(true);
+        console.log("bad");
 
-  const handleChangeToSend = (e) => {
-    // setToSend(e.target.value);
-    alert('Cannot write here')
-    // const result= Math.ceil(e.target.value * exchangeRate)
-    // setToReceive(result-(result*5.5/100));
-    // setfrais(result*5.5/100)
+      }
+    } catch (error) {
+      setIsTurned(true);
+      console.log("bad");
+
+      console.error('Une erreur s\'est produite lors de la vérification de l\'authentification:', error);
+    }
   };
 
-  const handleChangeToReceive = (e) => {
-    fetchExchangeRate()
-    setToReceive(e.target.value);
-    const result= Math.ceil(e.target.value-(e.target.value*5.5/100))
-    setToSend(Math.floor(result/exchangeRate));
-    console.log(Math.floor((e.target.value-(e.target.value*5.5/100))/exchangeRate));
-    setfrais(Math.floor(e.target.value*5.5/100))
-    console.log(exchangeRate)
-  };
-  const handleChangeToReceive2 = (e) => {
-    setToReceive(e.target.value);
-    const result= Math.floor(e.target.value / exchangeRate)
-    setfrais(Math.floor(result*5.5/100*exchangeRate));
-  };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+  
+        main: '#4A9E39',
+  
+      },
+      secondary: {
+  
+        main: '#EEEEEE',
+        
+      },
+    },
+  });  
+  
+ 
+  
   return (
     <BrowserRouter>
 
@@ -78,23 +98,30 @@ fetch(BASE_URL)
            minHeight: '90vh',
          }}
        >
-         <div style={{height:'75px', backgroundColor:'#eeeeee', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
+         {/* <div style={{height:'75px', backgroundColor:'#eeeeee', display:'flex', flexDirection:'column', alignItems:'center',textDecoration:'none', justifyContent:'center'}}>
      <img src={logo} alt="" style={{height:'75px'}}/>
-     </div>
-          <ThemeProvider theme={defaultTheme}sx={{display:'flex', alignItem:'center', justifyContent:'center', height:'100vh', margin:'50px'}}>
-           
+     </div> */}
+          <ThemeProvider theme={theme}sx={{display:'flex', alignItem:'center', justifyContent:'center', height:'100vh', margin:'50px'}}>
+            <Appbar
+            setIsTurned={setTransferType}
+            />
+
              <Container component="main" maxWidth="xs" sx={{mt:5}}>
 
              <Routes>
-        <Route path="/" element={<GabonToSa/>}/>
-        <Route path="/to-gabon" element={<SaToGabon/>}/>
+        <Route path="/" element={<Home
+        transferType={transferType}
+        />}/>
+        <Route path="/dashboard" element={<Admin
+        isLoggedIn={isLoggedIn}
+        setIsTurned={setIsTurned}
+        isTurned={isTurned}
+
+        />}/>
       </Routes>
 
-             <br/>
-             <Card sx={{padding:'20px 10px', height:'fit-content', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-             <WhatsAppIcon sx={{fontSize:'50px'}}/>
-             <span>+27 61 857 4387</span>
-             </Card>
+
+             
      
            </Container>
            
