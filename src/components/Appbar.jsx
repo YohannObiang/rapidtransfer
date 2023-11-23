@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from "../logoM-removebg-preview.png"
 import Drawer from './Drawer';
+import {Link } from "react-router-dom";
+
 
 
 
@@ -16,7 +18,9 @@ export default function Appbar({setIsTurned}) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{backgroundColor:"#EEEEEE"}}>
         <Toolbar style={{ display:"flex", justifyContent:"space-between"}}>
+          <Link to='/'>
           <img src={logo} alt="" style={{height:'75px'}}/>
+          </Link>
 
           <Drawer
           setIsTurned={setIsTurned}

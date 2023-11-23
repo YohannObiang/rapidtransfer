@@ -146,7 +146,7 @@ export default function App() {
              >
                <Container maxWidth="sm">
                  <Typography variant="body1">
-                 Développé par <a href='https://yohannobiang.com' style={{color:'black'}} ><strong>Yohann Obiang</strong></a>
+                 Développé par <a href='https://yohannobiang.com' style={{color:'black'}} ><strong>Yohann Obiang</strong>.</a>
                  </Typography>
                  <Copyright />
                </Container>
