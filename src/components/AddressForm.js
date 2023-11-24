@@ -28,6 +28,7 @@ export default function AddressForm(
   const handleChange = (event) => {
     setPaymentMethod(event.target.value);
   };
+  
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -40,11 +41,11 @@ export default function AddressForm(
             required
             id="lastName"
             name="lastName"
-            label="Airtelmoney"
+            label="No. Airtel Money"
             fullWidth
             variant="outlined"
             value={airtelmoney}
-            onChange={(event) => {setairtelmoney(event.target.value)}}
+            onChange={(event) => {setairtelmoney(event.target.value.replace(/[^0-9]/g, ''))}}
 
           />
         </Grid>
@@ -55,7 +56,7 @@ export default function AddressForm(
             name="lastName"
             label="Montant(XAF)"
             fullWidth
-
+            type='number'
             variant="outlined"
             value={tosend}
             onChange={(event) => {settosend(event.target.value)}}

@@ -29,9 +29,9 @@ const steps = ['Informations l\'emeteur', 'Informations destinataire', 'Verifica
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [tosend, settosend] = React.useState(0);
+  const [tosend, settosend] = React.useState("");
   const [receiptNumber, setreceiptNumber] = React.useState(0);
-  const [toreceive, settoreceive] = React.useState(0);
+  const [toreceive, settoreceive] = React.useState("");
   const [airtelmoney, setairtelmoney] = React.useState("");
   const [rib, setrib] = React.useState("");
   const [nom, setnom] = React.useState("");

@@ -44,7 +44,7 @@ export default function PaymentForm({
               autoComplete="cc-number"
               variant="outlined"
               value={rib}
-              onChange={(event) => {setrib(event.target.value)}}
+              onChange={(event) => {setrib(event.target.value.replace(/[^0-9]/g, ''))}}
             />
           </Grid>
 
@@ -55,6 +55,7 @@ export default function PaymentForm({
               label="Montant(ZAF)"
               helperText="Le montant a recevoir en Rand sud-africain(ZAF)"
               fullWidth
+              type='number'
               variant="outlined"
               value={toreceive}
               onChange={(event) => {settoreceive(event.target.value)}}
@@ -90,7 +91,7 @@ export default function PaymentForm({
               autoComplete="cc-number"
               variant="outlined"
               value={rib}
-              onChange={(event) => {setrib(event.target.value)}}
+              onChange={(event) => {setrib(event.target.value.replace(/[^0-9]/g, ''))}}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -118,6 +119,7 @@ export default function PaymentForm({
               label="Montant(ZAF)"
               helperText="Le montant a recevoir en Rand sud-africain(ZAF)"
               fullWidth
+              type='number'
               variant="outlined"
               value={toreceive}
               onChange={(event) => {settoreceive(event.target.value)}}
