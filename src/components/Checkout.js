@@ -36,6 +36,7 @@ export default function Checkout() {
   const [rib, setrib] = React.useState("");
   const [nom, setnom] = React.useState("");
   const [bank, setbank] = React.useState("");
+  const [date, setdate] = React.useState("");
 
   const toAdd={
       airtelmoney: String(airtelmoney),
@@ -50,11 +51,26 @@ const setReceipt = () => {
   axios.post('https://moneyflow-25oe.onrender.com/ajout/retrait', toAdd).then((res)=>{
     console.log(res.data.id_retrait)
     setreceiptNumber(res.data.id_retrait)
+    setdate(res.data.date)
+    console.log(res.data.date)
     console.log(toAdd);
     setActiveStep(activeStep + 1);
   })
-    
+
+  // Convertir la chaîne en objet Date
+  let dateObject = String(date);
   
+  // Extraire les composants de la date
+  let jour = dateObject.toString().padStart(2, '0');
+let mois = (dateObject + 1).toString().padStart(2, '0'); // Les mois commencent à 0, donc on ajoute 1
+let annee = dateObject;
+let heures = dateObject.toString().padStart(2, '0');
+let minutes = dateObject.toString().padStart(2, '0');
+let secondes = dateObject.toString().padStart(2, '0');
+
+// Construire la chaîne de date au format souhaité
+let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}`;
+
   };
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -97,6 +113,27 @@ const setReceipt = () => {
         throw new Error('Unknown step');
     }
   }
+
+  // Date initiale
+let dateString = String(date);
+
+// Convertir la chaîne en objet Date
+let dateObject = new Date(dateString);
+
+// Extraire les composants de la date
+let jour = dateObject.getUTCDate().toString().padStart(2, '0');
+let mois = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à 0, donc on ajoute 1
+let annee = dateObject.getUTCFullYear();
+let heures = dateObject.getUTCHours().toString().padStart(2, '0');
+let minutes = dateObject.getUTCMinutes().toString().padStart(2, '0');
+let secondes = dateObject.getUTCSeconds().toString().padStart(2, '0');
+
+// Construire la chaîne de date au format souhaité
+let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}`;
+
+// Afficher la date formatée
+console.log(dateFormatee);
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -133,9 +170,11 @@ const setReceipt = () => {
             <img src={logo} alt="" style={{height:'75px', margin:'auto'}}/>
             </div>
             <br />
-             <Typography variant="h6" gutterBottom style={{textAlign:'center', textDecoration:"underline",fontFamily:'monospace'}}>
-             Reçu No.{receiptNumber}
+             <Typography variant="h7" gutterBottom style={{textAlign:'left',fontFamily:'monospace'}}>
+             Reçu No.{receiptNumber} <br/>
+             
              </Typography>
+             <p style={{textAlign:'left', fontSize: '10px',fontFamily:'monospace'}}>Fait le {dateFormatee}</p>
              
              <Grid container spacing={2} style={{display:'flex', flexDirection:'column'}}>
                <Grid item xs={12} sm={12}>
@@ -193,7 +232,7 @@ const setReceipt = () => {
                   onClick={setReceipt}
                   sx={{ mt: 3, ml: 1 }}
                   >
-                  Place order
+                  Valider
                   </Button> 
                   : 
                   <Button
