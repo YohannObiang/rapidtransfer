@@ -94,7 +94,7 @@ export default function AlertDialog({handleClickOpen,handleClose,row,
                    <strong style={{fontFamily:'monospace'}}>Informations de l'émeteur</strong><br /><br />
                  </Typography>
                  <Typography gutterBottom  style={{fontFamily:'monospace'}}>
-                   Numéro d'envoie: <br /><strong>{receipt.airtelmoney}</strong><br /><br />
+                   Emetteur: <br /><strong>{receipt.airtelmoney}</strong><br /><br />
                    Somme envoyée: <br /><strong>{receipt.tosend} FCFA</strong>
        
                  </Typography>
