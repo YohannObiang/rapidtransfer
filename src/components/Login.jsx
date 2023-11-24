@@ -81,7 +81,7 @@ export default function Login({setUsername,setPassword, handleLogin}) {
               required
               fullWidth
               id="email"
-              label="Adresse Email "
+              label="Identifiant"
               name="email"
               autoComplete="email"
               autoFocus
