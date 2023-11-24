@@ -45,6 +45,7 @@ export default function AddressForm(
             fullWidth
             variant="outlined"
             value={airtelmoney}
+            type='number'
             onChange={(event) => {setairtelmoney(event.target.value.replace(/[^0-9]/g, ''))}}
 
           />

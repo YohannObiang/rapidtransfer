@@ -44,6 +44,7 @@ export default function PaymentForm({
               autoComplete="cc-number"
               variant="outlined"
               value={rib}
+              type='number'
               onChange={(event) => {setrib(event.target.value.replace(/[^0-9]/g, ''))}}
             />
           </Grid>
@@ -56,6 +57,7 @@ export default function PaymentForm({
               helperText="Le montant a recevoir en Rand sud-africain(ZAF)"
               fullWidth
               type='number'
+            
               variant="outlined"
               value={toreceive}
               onChange={(event) => {settoreceive(event.target.value)}}
@@ -91,6 +93,8 @@ export default function PaymentForm({
               autoComplete="cc-number"
               variant="outlined"
               value={rib}
+              type='number'
+
               onChange={(event) => {setrib(event.target.value.replace(/[^0-9]/g, ''))}}
             />
           </Grid>
@@ -102,6 +106,8 @@ export default function PaymentForm({
             id="demo-simple-select"
             value={bank}
             label="Banque"
+            type='number'
+
             onChange={(event) => {setbank(event.target.value)}}
           >
             <MenuItem value="FNB">FNB</MenuItem>
