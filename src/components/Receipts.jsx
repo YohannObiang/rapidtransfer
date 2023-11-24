@@ -123,7 +123,7 @@ export default function StickyHeadTable({retraits}) {
                 let jour = dateObject.getUTCDate().toString().padStart(2, '0');
                 let mois = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à 0, donc on ajoute 1
                 let annee = dateObject.getUTCFullYear();
-                let heures = dateObject.getUTCHours().toString().padStart(2, '0');
+                let heures = (dateObject.getUTCHours()+2).toString().padStart(2, '0');
                 let minutes = dateObject.getUTCMinutes().toString().padStart(2, '0');
                 let secondes = dateObject.getUTCSeconds().toString().padStart(2, '0');
                 

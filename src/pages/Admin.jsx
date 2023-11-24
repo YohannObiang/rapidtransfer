@@ -10,13 +10,14 @@ const LoginForm = ({setIsTurned, isTurned}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-
+  const [connected, setconnected] = React.useState(false);
 
   const handleLogin = async () => {
 
 
 console.log(username);
 console.log(password);
+setconnected(true)
     try {
       const response = await axios.post(`https://moneyflow-25oe.onrender.com/api/login`, {
         username,
@@ -35,6 +36,7 @@ console.log(password);
       // Gérez les erreurs de connexion ici
       console.error(error.response.data.message);
       window.location.reload();
+      setconnected(false)
 
 
     }
@@ -66,6 +68,7 @@ console.log(password);
             setUsername={setUsername}
             setPassword={setPassword}
             handleLogin={handleLogin}
+            connected={connected}
             />
      </div>
      ) : ( 

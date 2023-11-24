@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Copyright(props) {
   return (
@@ -43,7 +44,7 @@ const defaultTheme = createTheme({
   },
 });
 
-export default function Login({setUsername,setPassword, handleLogin}) {
+export default function Login({setUsername,setPassword, handleLogin, connected}) {
 
 
   const handleSubmit = (event) => {
@@ -56,7 +57,6 @@ export default function Login({setUsername,setPassword, handleLogin}) {
       password: data.get('password'),
     });
   };
-
   return (
     <div>
             <ThemeProvider theme={defaultTheme}>
@@ -99,16 +99,23 @@ export default function Login({setUsername,setPassword, handleLogin}) {
               onChange={(e) => setPassword(e.target.value)}
 
             />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleLogin}
-            >
-              Se connecter
-            </Button>
+            <br /><br />
+                {connected ? 
+                  <CircularProgress/>
+                : 
+                
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={handleLogin}
+                >
+                Se connecter
+                </Button>
+                }
+                <br /><br />
+            
             
         </Box>
       </Container>
