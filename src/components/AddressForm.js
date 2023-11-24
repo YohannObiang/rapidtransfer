@@ -41,12 +41,11 @@ export default function AddressForm(
             required
             id="lastName"
             name="lastName"
-            label="No. Airtel Money"
+            label="Airtel Money"
             fullWidth
             variant="outlined"
             value={airtelmoney}
-            type='number'
-            onChange={(event) => {setairtelmoney(event.target.value.replace(/[^0-9]/g, ''))}}
+            onChange={(event) => {setairtelmoney(event.target.value)}}
 
           />
         </Grid>
