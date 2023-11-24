@@ -225,7 +225,7 @@ console.log(dateFormatee);
                    <strong style={{fontFamily:'monospace'}}>Informations de l'émeteur</strong><br /><br />
                  </Typography>
                  <Typography gutterBottom  style={{fontFamily:'monospace'}}>
-                   Numéro d'envoie: <br /><strong>{airtelmoney}</strong><br /><br />
+                   Emeteur: <br /><strong>{airtelmoney}</strong><br /><br />
                    Somme envoyée: <br /><strong>{tosend} FCFA</strong>
        
                  </Typography>
