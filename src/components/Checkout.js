@@ -37,6 +37,31 @@ export default function Checkout() {
   const [nom, setnom] = React.useState("");
   const [bank, setbank] = React.useState("");
   const [date, setdate] = React.useState("");
+  const [paymentMethod, setPaymentMethod] = React.useState(0);
+
+  const [exchangeRate, setExchangeRate] = React.useState(0);
+
+  const BASE_URL = 'https://v6.exchangerate-api.com/v6/7d510eacf9aafb382d783d68/pair/ZAR/XAF';
+  React.useEffect(() => {
+    fetchExchangeRate();
+  }, []);
+
+  function fetchExchangeRate() {
+fetch(BASE_URL)
+  .then(res => res.json())
+  // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
+  .then(query => setExchangeRate(query.conversion_rate+2.5))
+
+  }
+
+
+  const handleChangeToReceive = (e) => {
+    fetchExchangeRate()
+    const result= Math.ceil(tosend-(tosend*5.5/100))
+    settoreceive(Math.floor(result/exchangeRate));
+  };
+
+
 
   const toAdd={
       airtelmoney: String(airtelmoney),
@@ -73,6 +98,9 @@ let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}
 
   };
   const handleNext = () => {
+    fetchExchangeRate()
+    const result= Math.ceil(tosend-(tosend*5.5/100))
+    settoreceive(Math.floor(result/exchangeRate));
     setActiveStep(activeStep + 1);
   };
 
@@ -88,6 +116,10 @@ let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}
         tosend={tosend}
         setairtelmoney={setairtelmoney}
         settosend={settosend}
+        paymentMethod={paymentMethod}
+        setPaymentMethod={setPaymentMethod}
+        setnom={setnom}
+        setbank={setbank}
         />;
       case 1:
         return <PaymentForm 
@@ -99,6 +131,7 @@ let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}
         settoreceive={settoreceive}
         setnom={setnom}
         setbank={setbank}
+        paymentMethod={paymentMethod}
         />;
       case 2:
         return <Review 
@@ -133,6 +166,13 @@ let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}
 
 // Afficher la date formatée
 console.log(dateFormatee);
+
+
+
+
+
+
+
 
   return (
     <React.Fragment>
@@ -195,7 +235,7 @@ console.log(dateFormatee);
                  <Typography gutterBottom  style={{fontFamily:'monospace'}}>
                    Nom du destinataire: <br /><strong>{nom}</strong><br /><br />
                    Banque: <br /><strong>{bank}</strong><br /><br />
-                   Numéro de compte: <br /><strong>{rib}</strong><br /><br />
+                   No. de compte/E-wallet: <br /><strong>{rib}</strong><br /><br />
                    Somme reçue: <br /><strong>R {toreceive}</strong>
                   </Typography>
                   

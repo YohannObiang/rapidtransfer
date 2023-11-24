@@ -15,9 +15,19 @@ export default function AddressForm(
     airtelmoney,
     tosend,
     setairtelmoney,
-    settosend
+    settosend,
+    setPaymentMethod,
+    setnom,
+    setbank,
+    paymentMethod
   }
 ) {
+
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -32,7 +42,6 @@ export default function AddressForm(
             name="lastName"
             label="Airtelmoney"
             fullWidth
-            autoComplete="family-name"
             variant="outlined"
             value={airtelmoney}
             onChange={(event) => {setairtelmoney(event.target.value)}}
@@ -46,7 +55,7 @@ export default function AddressForm(
             name="lastName"
             label="Montant(XAF)"
             fullWidth
-            autoComplete="family-name"
+
             variant="outlined"
             value={tosend}
             onChange={(event) => {settosend(event.target.value)}}
@@ -55,7 +64,7 @@ export default function AddressForm(
           />
         </Grid>
 
-        {/* <Grid item xs={12}>
+        <Grid item xs={12}>
         <FormControl>
         <Typography variant="h6" gutterBottom>
         Moyen de paiement      
@@ -64,14 +73,15 @@ export default function AddressForm(
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        
       >
-        <FormControlLabel value="Banque" control={<Radio />} label="Banque" />
-        <FormControlLabel value="E-wallet" control={<Radio />} label="E-wallet" />
+        <FormControlLabel value={0} control={<Radio />} label="Banque" onClick={()=>{setPaymentMethod(1)}}/>
+        <FormControlLabel value={1} control={<Radio />} label="E-wallet" onClick={()=>{setPaymentMethod(0);setbank('**************');setnom('**************')}}/>
 
 
       </RadioGroup>
     </FormControl>
-        </Grid> */}
+        </Grid>
       </Grid>
     </React.Fragment>
   );

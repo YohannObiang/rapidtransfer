@@ -44,9 +44,29 @@ export default function Review(
     toreceive,
     rib,
     nom,
-    bank
+    bank,
+    date
   }
-) {
+) 
+
+{
+
+
+  let dateString = String(date);
+
+// Convertir la chaîne en objet Date
+let dateObject = new Date(dateString);
+
+// Extraire les composants de la date
+let jour = dateObject.getUTCDate().toString().padStart(2, '0');
+let mois = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à 0, donc on ajoute 1
+let annee = dateObject.getUTCFullYear();
+let heures = dateObject.getUTCHours().toString().padStart(2, '0');
+let minutes = dateObject.getUTCMinutes().toString().padStart(2, '0');
+let secondes = dateObject.getUTCSeconds().toString().padStart(2, '0');
+
+// Construire la chaîne de date au format souhaité
+let dateFormatee = `${jour}-${mois}-${annee} à ${heures}:${minutes}:${secondes}`;
   return (
     <React.Fragment>
       <Typography variant="h5" gutterBottom style={{textAlign:'center'}}>
@@ -72,7 +92,7 @@ export default function Review(
           <Typography gutterBottom>
             Nom du destinataire: <br /><strong>{nom}</strong><br /><br />
             Banque: <br /><strong>{bank}</strong><br /><br />
-            Numéro de compte: <br /><strong>{rib}</strong><br /><br />
+            No. de compte/E-wallet: <br /><strong>{rib}</strong><br /><br />
             Somme reçue: <br /><strong>R {toreceive}</strong>
            </Typography>
           </Grid>
