@@ -35,7 +35,7 @@ export default function SaToGabon() {
   function fetchExchangeRate() {
 fetch(BASE_URL)
   .then(res => res.json())
-  // .then(query => setExchangeRate(Math.floor(((655.50/query.rates.ZAR)+2.5)*100)/100))
+  // .then(query => setExchangeRate(Math.floor(((6540/query.rates.ZAR)+2.5)*100)/100))
   .then(query => setExchangeRate(query.conversion_rate-2.5))
 
   }
@@ -44,23 +44,23 @@ fetch(BASE_URL)
     // setToSend(e.target.value);
     alert('Cannot write here')
     // const result= Math.ceil(e.target.value * exchangeRate)
-    // setToReceive(result-(result*5.5/100));
-    // setfrais(result*5.5/100)
+    // setToReceive(result-(result*4/100));
+    // setfrais(result*4/100)
   };
 
   const handleChangeToReceive = (e) => {
     fetchExchangeRate()
     setToReceive(e.target.value);
-    const result= Math.ceil(e.target.value-(e.target.value*5.5/100))
+    const result= Math.ceil(e.target.value-(e.target.value*4/100))
     setToSend(Math.floor(result*exchangeRate));
-    console.log(Math.floor((e.target.value-(e.target.value*5.5/100))/exchangeRate));
-    setfrais(Math.floor(e.target.value*5.5/100))
+    console.log(Math.floor((e.target.value-(e.target.value*4/100))/exchangeRate));
+    setfrais(Math.floor(e.target.value*4/100))
     console.log(exchangeRate)
   };
   const handleChangeToReceive2 = (e) => {
     setToReceive(e.target.value);
     const result= Math.floor(e.target.value / exchangeRate)
-    setfrais(Math.floor(result*5.5/100*exchangeRate));
+    setfrais(Math.floor(result*4/100*exchangeRate));
   };
 
   return (
