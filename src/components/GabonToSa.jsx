@@ -60,7 +60,7 @@ fetch(BASE_URL)
   const handleChangeToReceive2 = (e) => {
     setToReceive(e.target.value);
     const result= Math.floor(e.target.value / exchangeRate)
-    setfrais(Math.floor(result*5.5/100*exchangeRate));
+    setfrais(Math.floor(result*4/100*exchangeRate));
   };
 
   return (
