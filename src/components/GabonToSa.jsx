@@ -35,8 +35,8 @@ export default function GabonToSa() {
   function fetchExchangeRate() {
 fetch(BASE_URL)
   .then(res => res.json())
-  // .then(query => setExchangeRate(Math.floor(((6540/query.rates.ZAR)+2.5)*100)/100))
-  .then(query => setExchangeRate(query.conversion_rate+2.5))
+  // .then(query => setExchangeRate(Math.floor(((6540/query.rates.ZAR)+2.7)*100)/100))
+  .then(query => setExchangeRate(query.conversion_rate+2.7))
 
   }
 
